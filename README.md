@@ -1,8 +1,9 @@
 # Command EXecutor
-CEX (pronounced as "keks" ) is the bash framework designed to organize work with scripts.  
+CEX (pronounced as "keks") is the bash framework designed to organize work with scripts.  
  
 
 ## Init
+Run:
 ```
 mkdir my_tool_dir
 cd my_tool_dir
@@ -33,7 +34,7 @@ my_tool hello-world
 ```
 
 ## Create command
-Create  
+Create:   
 `src/do_routine.sh`  
 
 Append to _commands_:
@@ -66,7 +67,8 @@ Everyday routine has been started...
 ``` 
 
 ## Multitool
-You can create multiple tools with single CEX source code. To do that, run:
+You can create multiple tools with single CEX source code.  
+Run:
 ```
 mkdir my_tool_1
 cd my_tool_1
@@ -80,7 +82,8 @@ cd ..
 ```
 
 ## Submodule
-You can use CEX as submodule:
+You can use CEX as submodule.  
+Run:
 ```
 git submodule add https://github.com/shiv-tech-git/cex.git
 ./cex/bootstrap.sh
@@ -102,4 +105,14 @@ Global variables:
   - CEX_APP_NAME
   - CEX_APP_ROOT
 
-Examine `hello-world` example for better understanding.
+Examine `hello-world` example for better understanding.  
+Run:  
+```
+./cex/bootstrap.sh
+App name: my_tool
+...
+...
+...
+. ./$(basename $SHELL)rc
+my_tool hello-world
+```
