@@ -1,0 +1,7 @@
+function cex_echo_and_exec
+{
+    local command="$1"
+
+    echo $command
+    $(exec $command)
+}

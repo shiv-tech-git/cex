@@ -1,4 +1,6 @@
 #Command executor
+    --install       "./src/install.sh"
+    --uninstall     "./src/install.sh --uninstall"
     --update        "./src/update.sh"
     --help          "./src/help.sh"
 

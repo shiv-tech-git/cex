@@ -6,7 +6,7 @@ CEX (pronounced as "keks" ) is the bash framework designed to organize work with
 ```
 mkdir my_tool_dir
 cd my_tool_dir
-git clone [cex_repo]
+git clone https://github.com/shiv-tech-git/cex.git
 ./cex/bootstrap.sh
 ```
 Set name:
@@ -39,7 +39,7 @@ Create
 Append to _commands_:
 ```
 #My everyday routine
-    do_routine      ./src/do_routine.sh
+    do_routine      "./src/do_routine.sh"
 ```
 Run:
 ```
@@ -79,13 +79,22 @@ cd my_tool_2
 cd ..
 ```
 
+## Submodule
+You can use CEX as submodule:
+```
+git submodule add https://github.com/shiv-tech-git/cex.git
+./cex/bootstrap.sh
+```
+
 ## Notice!
 In _commands_ file: 
   - comments that starts with '##' visible only in _commands_ file
   - comments that starts with '#' visible in `my_tool --help`
-  - commands that starts with '--' reserved as CEX internal commands  
+  - commands that starts with '--' reserved for CEX commands  
 
 In _preload_ dir:
-  - all files contect will be exported before executing scripts from _src_ dir
+  - all files content will be exported before executing scripts
+  - functions that starts with "cex_" reserved for CEX functions
+  - variables that starts with "CEX_" reserved for CEX variables
 
 Examine `hello-world` example for better understanding.

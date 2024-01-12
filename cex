@@ -49,9 +49,11 @@ function process_cmd_list
 {
     pushd $(dirname $1) > /dev/null
 
+    preload_from_dir preload
+
     job=$(find_cmd $1)
     if [ ! -z "$job" ]; then
-        run_cmd $job
+        run_cmd "$job"
     fi
 
     popd > /dev/null
@@ -68,11 +70,7 @@ function preload_from_dir
 
 process_cmd_list ${CEX_ROOT}/commands
 
-if [ -z "$CEX_APP_ROOT" ]; then
-    echo "CEX_APP_ROOT is undefined"
-    exit 1
-fi
-preload_from_dir ${CEX_APP_ROOT}/preload
+cex_check_var CEX_APP_ROOT
 process_cmd_list ${CEX_APP_ROOT}/commands
 
 echo -e "invalid cmd: $cmd
