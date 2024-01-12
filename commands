@@ -1,0 +1,4 @@
+#Command executor
+    --update        "./src/update.sh"
+    --help          "./src/help.sh"
+
