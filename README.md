@@ -97,4 +97,9 @@ In _preload_ dir:
   - functions that starts with "cex_" reserved for CEX functions
   - variables that starts with "CEX_" reserved for CEX variables
 
+Global variables:
+  - CEX_APP_ID
+  - CEX_APP_NAME
+  - CEX_APP_ROOT
+
 Examine `hello-world` example for better understanding.
