@@ -15,6 +15,7 @@ if [ "$1" == "--uninstall" ]; then
         exit 0
     fi
 
+    cex_invoke_hook pre_uninstall.sh
     IFS=$'\n'
     for line in $config ; do
         escaped_line=$(echo $line | sed 's/\//\\\//g') 
@@ -23,6 +24,7 @@ if [ "$1" == "--uninstall" ]; then
         echo $config | sed 's/\(.*\)/\t\1/'
         echo
     done
+    cex_invoke_hook post_uninstall.sh
 else
     #install
     if grep -q "$CEX_APP_ID" $SHELL_CONFIG ; then
@@ -30,9 +32,11 @@ else
         exit 0
     fi
 
+    cex_invoke_hook pre_install.sh
     echo "$config" >> $SHELL_CONFIG
     echo -e "Append to $SHELL_CONFIG:"
     echo $config | sed 's/\(.*\)/\t\1/'
     echo
     cex_print_notice "run: . $SHELL_CONFIG"
+    cex_invoke_hook post_install.sh
 fi
