@@ -65,7 +65,7 @@ Output:
 Everyday routine has been started...
 ``` 
 
-## Multiple tools
+## Multitool
 You can create multiple tools with single CEX source code. To do that, run:
 ```
 mkdir my_tool_1
