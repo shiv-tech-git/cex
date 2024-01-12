@@ -73,6 +73,5 @@ process_cmd_list ${CEX_ROOT}/commands
 cex_check_var CEX_APP_ROOT
 process_cmd_list ${CEX_APP_ROOT}/commands
 
-echo -e "invalid cmd: $cmd
-run: $CEX_APP_NAME --help
-"
+cex_print_error "invalid cmd: $cmd
+run: $CEX_APP_NAME --help"

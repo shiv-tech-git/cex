@@ -34,5 +34,5 @@ else
     echo -e "Append to $SHELL_CONFIG:"
     echo $config | sed 's/\(.*\)/\t\1/'
     echo
-    echo -e "run: . $SHELL_CONFIG"
+    cex_print_notice "run: . $SHELL_CONFIG"
 fi
