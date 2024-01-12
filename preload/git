@@ -2,7 +2,9 @@ function cex_git_pull
 {
     local git_dir="$1"
 
+    echo "cd $git_dir"
     cd $git_dir
+    echo "git pull"
     git pull
 }
 
@@ -10,7 +12,9 @@ function cex_git_submodule_update
 {
     local git_dir="$1"
 
-    cd $git_dir   
+    echo "cd $git_dir"
+    cd $git_dir
+    echo "git submodule update"
     git submodule update
 }
 
