@@ -47,8 +47,8 @@ echo "Create link: $CEX_APP_NAME"
 create_script "${LINK_NAME}" "#!/bin/bash
 export CEX_APP_NAME=$CEX_APP_NAME
 export CEX_APP_ID=$CEX_APP_ID
-export CEX_APP_ROOT="$CEX_APP_ROOT"
-$SCRIPT_DIR/cex \$@
+export CEX_APP_ROOT=\"\$( cd \"\$(dirname \"\${BASH_SOURCE[0]}\")\" ; pwd -P )\"
+\${CEX_APP_ROOT}/$(realpath --relative-to=${PWD} ${SCRIPT_DIR})/cex \$@
 "
 
 
@@ -84,7 +84,9 @@ echo -e "## Syntax
 echo "Create hello_world example"
 echo
 
-echo "run: . $SHELL_CONFIG"
+red='\033[0;31m'
+reset='\033[0m'
+printf "${red}run:${reset} . $SHELL_CONFIG\\n" 1>&2
 echo "run: ${CEX_APP_NAME} --help"
 echo "run: ${CEX_APP_NAME} hello-world"
 

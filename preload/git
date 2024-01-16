@@ -14,8 +14,8 @@ function cex_git_submodule_update
 
     echo "cd $git_dir"
     cd $git_dir
-    echo "git submodule update"
-    git submodule update
+    echo "git submodule update --init --recursive"
+    git submodule update --init --recursive
 }
 
 function cex_git_head_hash
