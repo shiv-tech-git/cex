@@ -89,22 +89,36 @@ git submodule add https://github.com/shiv-tech-git/cex.git
 ./cex/bootstrap.sh
 ```
 
-## Notice!
-In _commands_ file: 
+## Global variables
+In all scripts next variables available:
+  - CEX_APP_ID
+  - CEX_APP_NAME
+  - CEX_APP_ROOT
+
+## Commands file syntax
   - comments that starts with '##' visible only in _commands_ file
   - comments that starts with '#' visible in `my_tool --help`
   - commands that starts with '--' reserved for CEX commands  
 
+## Preload
 In _preload_ dir:
   - all files content will be exported before executing scripts
   - functions that starts with "cex_" reserved for CEX functions
   - variables that starts with "CEX_" reserved for CEX variables
 
-Global variables:
-  - CEX_APP_ID
-  - CEX_APP_NAME
-  - CEX_APP_ROOT
+## Hooks
+Files in _hooks_ dir with special name fill be invoked on:  
+`dbs --install`:
+  - _./hooks/pre_install.sh_
+  - _./hooks/post_install.sh_
 
+`dbs --uninstall`:
+  - _./hooks/pre_uninstall.sh_
+  - _./hooks/post_uninstall.sh_
+
+See /preload/hooks.sh `function cex_invoke_hook`
+
+## Hello world
 Examine `hello-world` example for better understanding.  
 Run:  
 ```
