@@ -6,43 +6,10 @@ function cex_echo_and_exec
     $(exec $command)
 }
 
-function cex_print_error 
-{
-    local red='\033[0;31m'
-    local reset='\033[0m'
-
-    while read msg
-    do
-        printf "${red}%s${reset}\\n" "${msg}" 1>&2
-    done <<< "$1"
-}
-
 function cex_exit_on_error
 {
     cex_print_error "$*"
     exit 1
-}
-
-function cex_print_info 
-{
-    local green='\033[0;32m'
-    local reset='\033[0m'
-
-    while read msg
-    do
-        printf "${green}%s${reset}\\n" "${msg}" 1>&2
-    done <<< "$1"
-}
-
-function cex_print_warning
-{
-    local yellow='\033[0;33m'
-    local reset='\033[0m'
-
-    while read msg
-    do
-        printf "${yellow}%s${reset}\\n" "${msg}" 1>&2
-    done <<< "$1"
 }
 
 function cex_check_var
