@@ -31,7 +31,7 @@ function run_cmd
 
 function find_cmd
 {
-    while read n c 
+    while read n c comment
     do
         if [ -z "$n" ]; then
             continue
