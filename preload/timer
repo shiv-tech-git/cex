@@ -1,0 +1,17 @@
+function cex_timer_reset
+{
+    SECONDS=0
+}
+
+function cex_timer_print
+{
+    local duration=$SECONDS
+    local minutes=$((duration / 60))
+    local seconds=$((duration % 60))
+
+    if [ ${minutes} -gt 0 ]; then
+        cex_print_info "$1 ${minutes} min ${seconds} sec"
+    else
+        cex_print_info "$1 ${seconds} sec"
+    fi
+}
