@@ -31,13 +31,9 @@ function run_cmd
 
 function find_cmd
 {
-    while read n c comment
+    while read n c
     do
         if [ -z "$n" ]; then
-            continue
-        fi
-
-        if [ ${n:0:1} == '#' ]; then
             continue
         fi
 
@@ -45,7 +41,7 @@ function find_cmd
             echo "$c"
             break
         fi
-    done < $1
+    done <<< "$(cat $1 | sed 's/#.*$//')" # remove all comments
 }
 
 function process_cmd_list
