@@ -15,17 +15,9 @@ function run_cmd
         cmd_=$(echo "$cmd_" | sed -e 's/^"//' -e 's/"$//')
     fi
 
-    if [ "${cmd_:0:2}" == '${' ]; then
-        echo -e "$cmd_ $args \n"
-        exec $(eval echo $cmd_) $args
-    elif [ "${cmd_:0:2}" == './' ]; then
-        echo -e "$cmd_ $args \n"
-        $cmd_ $args
-    else
-        echo -e "$cmd_ $args \n"
-        exec $cmd_ $args
-    fi
-
+    echo -e "$cmd_ $args \n"
+    exec $(eval echo $cmd_)
+    
     exit 0
 }
 
