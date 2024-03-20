@@ -16,7 +16,7 @@ function run_cmd
     fi
 
     echo -e "$cmd_ $args \n"
-    exec $(eval echo $cmd_)
+    exec $(eval echo "$cmd_ $args")
     
     exit 0
 }
