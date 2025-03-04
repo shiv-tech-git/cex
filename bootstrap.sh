@@ -48,6 +48,7 @@ create_script "${LINK_NAME}" "#!/bin/bash
 export CEX_APP_NAME=$CEX_APP_NAME
 export CEX_APP_ID=$CEX_APP_ID
 export CEX_APP_ROOT=\"\$( cd \"\$(dirname \"\${BASH_SOURCE[0]}\")\" ; pwd -P )\"
+export CEX_APP_CALL_DIR=\${PWD}
 \${CEX_APP_ROOT}/$(realpath --relative-to=${PWD} ${SCRIPT_DIR})/cex \$@
 "
 
