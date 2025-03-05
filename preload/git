@@ -24,3 +24,16 @@ function cex_git_head_hash
 
     echo $(cd $git_dir && git rev-parse --short HEAD)
 }
+
+function cex_git_commit_message
+{
+    local commit_hash="$1"
+    local git_dir=$CEX_APP_CALL_DIR
+
+    if [ -n "$2" ]
+    then
+        git_dir="$2"
+    fi
+
+    echo $(cd $git_dir && git log -1 --pretty=format:%B $commit_hash)
+}
