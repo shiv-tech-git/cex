@@ -75,7 +75,7 @@ echo -e "## Syntax
 ## '##' comment for this file 
 ## 
 ## [COMMAND_NAME] "[COMMAND]"
-## --[COMMAND_NAME] reserved for ces commands
+## --[COMMAND_NAME] reserved for cex commands
 ##
 #Hello world
     hello-world     "./src/hello_world.sh"
