@@ -3,21 +3,34 @@
 export CEX_ROOT="$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
 cd $CEX_ROOT
 
-cmd=$1
-shift
-args="$@"
+__cat=n
+__args=""
+__cmd=""
 
 function run_cmd
 {
-    local cmd_=$1
+    local cmd=$1
 
-    if [ ${cmd_:0:1} == '"' ]; then
-        cmd_=$(echo "$cmd_" | sed -e 's/^"//' -e 's/"$//')
+    if [ ${cmd:0:1} == '"' ]; then
+        cmd=$(echo "$cmd" | sed -e 's/^"//' -e 's/"$//')
     fi
 
-    echo -e "$cmd_ $args \n"
-    exec $(eval echo "$cmd_ $args")
+    if [ "${__cat}" == "y" ];
+    then
     
+        if [ ! -f "$cmd" ]
+        then
+            cex_print_error "-c or --cat options are only used for commands that call scripts"
+            exit 1
+        fi
+        
+        content="$(cat $cmd)"
+        echo "$content" | envsubst
+        exit 0
+    fi
+
+    echo -e "$cmd $__args \n"
+    exec $(eval echo "$cmd $__args")
     exit 0
 }
 
@@ -29,7 +42,7 @@ function find_cmd
             continue
         fi
 
-        if [ "$n" == "$cmd" ] ; then
+        if [ "$n" == "$__cmd" ] ; then
             echo "$c"
             break
         fi
@@ -38,11 +51,10 @@ function find_cmd
 
 function process_cmd_list
 {
-    pushd $(dirname $1) > /dev/null
+    local commands_file="$1"
+    pushd $(dirname $commands_file) > /dev/null
 
-    preload_from_dir preload
-
-    job=$(find_cmd $1)
+    job=$(find_cmd $commands_file)
     if [ ! -z "$job" ]; then
         run_cmd "$job"
     fi
@@ -59,9 +71,36 @@ function preload_from_dir
     set +a
 }
 
+function process_args
+{
+    while true
+    do
+        if [ "$1" == "-d" ] || [ "$1" == "--debug" ]
+        then
+            export CEX_ENABLE_DEBUG=y
+            shift
+            continue
+        elif [ "$1" == "-c" ] || [ "$1" == "--cat" ]
+        then
+            __cat=y
+            shift
+            continue
+        fi
+
+        break
+    done
+
+    __cmd=$1
+    shift
+    __args="$@"
+}
+
+preload_from_dir ${CEX_ROOT}/preload
+process_args $@
 process_cmd_list ${CEX_ROOT}/commands
 
 cex_check_var CEX_APP_ROOT
+preload_from_dir ${CEX_APP_ROOT}/preload
 process_cmd_list ${CEX_APP_ROOT}/commands
 
 cex_print_error "invalid cmd: $cmd

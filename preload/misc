@@ -22,3 +22,11 @@ function cex_check_var
         cex_exit_on_error "$var_name is undefined. ${msg}"
     fi
 }
+
+function cex_enable_debug
+{
+    if [ "${CEX_ENABLE_DEBUG}" == "y" ]
+    then
+        set -x
+    fi
+}

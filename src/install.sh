@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+cex_enable_debug
+
 cex_check_var CEX_APP_ROOT
 cex_check_var CEX_APP_ID
 
