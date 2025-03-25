@@ -30,7 +30,7 @@ function run_cmd
     fi
 
     echo -e "$cmd $__args \n"
-    exec $(eval echo "$cmd $__args")
+    exec $(eval echo "$cmd \"$__args\"")
     exit 0
 }
 
