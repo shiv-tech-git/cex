@@ -5,7 +5,7 @@ cex_enable_debug
 
 function print_help
 {
-    cat $1 | sed '/^##/d' | tr -d '"#'
+    cat $1 | sed '/^##/d' | sed "s/<CEX_APP_NAME>/${CEX_APP_NAME}/" | tr -d '"#'
 }
 
 print_help ${CEX_ROOT}/commands

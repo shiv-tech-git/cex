@@ -4,6 +4,7 @@ export CEX_ROOT="$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
 cd $CEX_ROOT
 
 __cat=n
+__nano=n
 __args=""
 __cmd=""
 
@@ -17,15 +18,26 @@ function run_cmd
 
     if [ "${__cat}" == "y" ];
     then
-    
-        if [ ! -f "$cmd" ]
+        local file=$(echo "$cmd" | cut -d' ' -f1)
+        if [ ! -f "$file" ]
         then
-            cex_print_error "-c or --cat options are only used for commands that call scripts"
-            exit 1
+            echo "$cmd"
+            exit 0
         fi
         
-        content="$(cat $cmd)"
+        content="$(cat $file)"
         echo "$content" | envsubst
+        exit 0
+    elif [ "${__nano}" == "y" ];
+    then
+        local file=$(echo "$cmd" | cut -d' ' -f1)
+        if [ ! -f "$file" ]
+        then
+            cex_print_error "-n or --nano options are only used for commands that call a script"
+            exit 1
+        fi
+
+        nano $file
         exit 0
     fi
 
@@ -83,6 +95,11 @@ function process_args
         elif [ "$1" == "-c" ] || [ "$1" == "--cat" ]
         then
             __cat=y
+            shift
+            continue
+        elif [ "$1" == "-n" ] || [ "$1" == "--nano" ]
+        then
+            __nano=y
             shift
             continue
         fi
