@@ -8,9 +8,9 @@
 #Usage: <CEX_APP_NAME> [RUN_OPTION] <COMMAND> [ARGS]...
 
 #[RUN_OPTION]
-#    -c, --cat                                                 show command content
-#    -n, --nano                                                open command script in nano
-#    -d, --debug                                               run command in debug mode 
+#    -c, --cat          show command content
+#    -n, --nano         open command script in nano
+#    -d, --debug        run command in debug mode 
 
 #Command executor
     --install           "./src/install.sh"
