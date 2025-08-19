@@ -10,9 +10,20 @@ SHELL_BIN=$(basename $SHELL)
 SHELL_CONFIG=~/".${SHELL_BIN}rc"
 
 config="PATH=\$PATH:${CEX_APP_ROOT} #$CEX_APP_ID"
+install=n
+uninstall=n
 
-if [ "$1" == "--uninstall" ]; then
-    #uninstall
+
+if [ -z "$1" ]; then
+    install=y
+elif [ "$1" == "--uninstall" ]; then
+    uninstall=y
+elif [ "$1" == "--reinstall" ]; then
+    install=y
+    uninstall=y
+fi
+
+if [ "${uninstall}" == "y" ]; then
     if ! grep -q "$CEX_APP_ID" $SHELL_CONFIG ; then
         echo "Not installed for ${SHELL_BIN}"
         exit 0
@@ -28,8 +39,9 @@ if [ "$1" == "--uninstall" ]; then
         echo
     done
     cex_invoke_hook post_uninstall.sh
-else
-    #install
+fi
+
+if [ "${install}" == "y" ]; then
     if grep -q "$CEX_APP_ID" $SHELL_CONFIG ; then
         echo "Already installed for ${SHELL_BIN}"
         exit 0
